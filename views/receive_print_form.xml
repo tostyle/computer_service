@@ -1,0 +1,161 @@
+<openerp>
+<data>
+    <report
+        id="report_received"
+        model="comservice.com_receive"
+        string="Print Receive Form"
+        name="computer_service.receive_form"
+        file="comservice.report_received"
+        report_type="qweb-html" />
+
+    <template id="receive_form">
+        <t t-call="report.html_container">
+          <t t-foreach="docs" t-as="doc">
+              <!-- <link rel="stylesheet" href="/computer_service/static/src/js/custom.css"/> -->
+
+              <div class="page">
+                  <h4 class="text-right" >เลขที่ <u><span t-field="doc.name"/></u></h4>
+                  <h3 class="text-center">แบบฟอร์มการรับคอมพิวเตอร์พร้อมอุปกรณ์ และโปรแกรมที่ติดตั้ง</h3>
+
+                  <div class="row">
+                    <div class="col-xs-4">ชื่อ-นามสกุล <span t-field="doc.user_request_id.name"/></div>
+                    <div class="col-xs-4">รหัสพนักงาน <span t-field="doc.user_request_id.user_code"/></div>
+                    <div class="col-xs-4">บริษัท <span t-field="doc.user_request_id.user_company"/></div>
+                  </div>
+                  <div class="row">
+                    <div class="col-xs-4">แผนก <span t-field="doc.user_request_id.user_division"/></div>
+                    <div class="col-xs-4"> ฝ่าย <span t-field="doc.user_request_id.user_section"/></div>
+                    <div class="col-xs-4">เบอร์ต่อ <span t-field="doc.user_request_id.user_tel"/></div>
+                  </div>
+                  <div class="row" style="margin-top:20px;">
+
+                    <div class="col-xs-12">
+                      ได้รับคอมพิวเตอร์ที่ได้ทำการติดตั้งโปรแกรม พร้อมทั้งอุปกรณ์เพื่อใช้ในการปฏิบัติงาน ทั้งนี้เพื่อเป็นประโยชน์ในการบันทึกรายการทรัพย์สินของทางบริษัทฯ จึงขอสรุปรายการคอมพิวเตอร์พร้อมอุปกรณ์ และโปรแกรมที่ทำการติดตั้ง ดังนี้
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-xs-9">
+                      <table class="line-space table table-striped table-bordered">
+                        <tr>
+                          <th class="col-xs-1">ที่</th>
+                          <th class="col-xs-6">รายการ </th>
+                          <th class="col-xs-2 text-center">S/N</th>
+                          <th class="col-xs-1 text-center">จำนวน</th>
+                          <th class="col-xs-2">เลขที่รับคืน</th>
+                        </tr>
+                        <t t-set="remain_length" t-value="range(6 - len(doc.equipment_ids))"/>
+                        <t t-foreach="doc.equipment_ids" t-as="equipment">
+                          <t t-set="equipment_index" t-value="equipment_index + 1"/>
+                          <tr>
+                            <td class="col-xs-1"><t t-esc="equipment_index"/></td>
+                            <td class="col-xs-6"><t t-esc="equipment.equipment_id.name"/></td>
+                            <td class="col-xs-2 text-center"><t t-esc="equipment.serial"/></td>
+                            <td class="col-xs-1 text-center"><t t-esc="equipment.quantity"/></td>
+                            <td class="col-xs-2"><t t-esc="doc.returned_id.name"/></td>
+                            <!-- <td><t t-esc="equipment.serial"/></td>
+                            <td><t t-esc="equipment.quantity"/></td> -->
+                          </tr>
+                        </t>
+                        <t t-foreach="remain_length" t-as="remain">
+                          <tr>
+                            <td><![CDATA[&nbsp;]]></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                          </tr>
+                        </t>
+                        <tr>
+                          <td colspan="5">หมายเหตุ</td>
+                        </tr>
+                      </table>
+                    </div>
+                    <div class="col-xs-3">
+                      <table class="program-table line-space table table-striped table-condensed">
+                        <tr>
+                          <th>โปรแกรมที่ติดตั้ง</th>
+                        </tr>
+                        <t t-foreach="[{'value':'freeware','name':'Freeware'},
+                                       {'value':'license','name':'License'}]" t-as="program_type">
+                          <tr>
+                            <td><strong><t t-esc="program_type['name']"/></strong></td>
+                          </tr>
+
+                          <t t-foreach="doc.program_ids" t-as="program">
+                            <t t-if="program.program_type==program_type['value']" >
+                              <tr>
+                                  <td><t t-esc="program.name"/>
+                                      <t t-esc="program.version"/>
+                                  </td>
+                              </tr>
+                            </t>
+                          </t>
+                        </t>
+                      </table>
+                    </div>
+                  </div>
+              </div>
+
+              <div class="row">
+              <div class="col-xs-12">
+                      โดยที่ข้าพเจ้า.............................................................................. รับทราบถึงความรับผิดชอบในการจัดเก็บทรัพย์สินของบริษัทฯ ในกรณีที่ทรัพย์สินของบริษัทฯ เกิดการชำรุด หรือสูญหายอันเนื่องมาจากความประมาทของพนักงาน หรือมีการติดตั้งโปรแกรมที่ละเมิดลิขสิทธิ์ โดยไม่ได้รับอนุญาต พนักงานผู้รับทรัพย์สินยินดีที่จะรับผิดชอบค่าใช้จ่าย หรือค่าเสียหายที่เกิดขึ้น
+                    </div>
+                    </div>
+              <div class="row line-space">
+                <div class="col-xs-6 text-center">
+                  ลงชื่อ...................................................
+                  พนักงานผู้ส่งคืนทรัพย์สิน
+                </div>
+                <div class="col-xs-6 text-center">
+                  ลงชื่อ...................................................
+                  ผู้อนุมัติ DM/SM
+                </div>
+              </div>
+              <div class="row line-space">
+                <div class="col-xs-6 text-center">
+                  ( ................................................... )
+                </div>
+                <div class="col-xs-6 text-center">
+                  ( ................................................... )
+                </div>
+              </div>
+              <div class="row line-space">
+                <div class="col-xs-6 text-center">
+                  วันที่....................................................
+                </div>
+                <div class="col-xs-6 text-center">
+                  วันที่....................................................
+                </div>
+              </div>
+
+              <div class="row line-space">
+                <div class="col-xs-6 text-center">
+                  ลงชื่อ...................................................
+                  พนักงานผู้ส่งคืนทรัพย์สิน
+                </div>
+                <div class="col-xs-6 text-center">
+                  ลงชื่อ...................................................
+                  ผู้จัดการฝ่ าย IS
+                </div>
+              </div>
+              <div class="row line-space">
+                <div class="col-xs-6 text-center">
+                  ( ................................................... )
+                </div>
+                <div class="col-xs-6 text-center">
+                  ( ................................................... )
+                </div>
+              </div>
+              <div class="row line-space">
+                <div class="col-xs-6 text-center">
+                  วันที่....................................................
+                </div>
+                <div class="col-xs-6 text-center">
+                  วันที่....................................................
+                </div>
+              </div>
+          </t>
+        </t>
+    </template>
+</data>
+</openerp>

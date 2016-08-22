@@ -1,0 +1,16 @@
+.line-space
+{
+  margin-top: 15px;
+}
+body
+{
+   font-size:12px;
+}
+.program-table
+{
+	font-size: 6px;
+}
+.program-table.table-striped > tbody > tr > td
+{
+   padding: 3px;
+}

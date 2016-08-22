@@ -1,0 +1,56 @@
+<openerp>
+    <data>
+      <record model="ir.ui.view" id="wizard_form_view">
+          <field name="name">comsummary.filter</field>
+          <field name="model">comservice.com_summary</field>
+          <field name="arch" type="xml">
+              <form string="Add Attendees">
+                  <group>
+                      <field name="requester_ids"/>
+                  </group>
+                  <footer>
+                    <button name="show_report" type="object"
+                               string="Show" class="oe_highlight"/>
+                  </footer>
+              </form>
+          </field>
+      </record>
+      <act_window id="launch_summary_report_wizard"
+                  name="Requesters Summary"
+                  res_model="comservice.com_summary"
+                  view_mode="form"
+                  target="new"
+                  key2="client_action_multi"/>
+      <report
+          id="summary_requester"
+          model="comservice.com_summary"
+          string="Summary Report"
+          name="computer_service.report_summary_requester"
+          file="comservice.report_summary_requester"
+          report_type="qweb-html" />
+      <template id="report_summary_requester">
+          <t t-call="report.html_container">
+              <t t-call="report.internal_layout">
+                  <div class="page">
+                      <h2>Details of Sales</h2>
+                      <span t-esc="res_company.name"/>
+                      <span t-esc="getRequesterDetail(data['form']['requester_ids']) or 'All'" />
+                      <div t-foreach="getReceivedList(data['form']['requester_ids'])" t-as="receiveForm">
+                        <span t-field="receiveForm.equipment_ids"/>
+                        <div t-esc="receiveForm.name" />
+                        <div t-esc="receiveForm.user_request_id.name" />
+                        <div t-esc="receiveForm.returned_id.name" />
+                        <div t-foreach="receiveForm.equipment_ids" t-as="equipment">
+                           <div t-esc="equipment.equipment_id.name" />
+                        </div>
+                        <hr />
+                        <button string="xxx" name="Xxx" value="butonn" />
+                        <button name="show_report2" type="object"
+                                   string="Show" class="oe_highlight"/>
+                      </div>
+                  </div>
+              </t>
+          </t>
+      </template>
+    </data>
+</openerp>

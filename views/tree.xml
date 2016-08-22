@@ -1,0 +1,69 @@
+<openerp>
+    <data>
+      <record model="ir.ui.view" id="receive_tree_view">
+         <field name="name">receive.tree</field>
+         <field name="model">comservice.com_receive</field>
+         <field name="arch" type="xml">
+             <tree string="Received Computer Tree">
+                 <field name="name"/>
+                 <field name="requested_company"/>
+                 <field name="user_request_id">
+                    <tree>
+                      <field name="user_division" />
+                    </tree>
+                 </field>
+             </tree>
+         </field>
+      </record>
+
+      <record model="ir.ui.view" id="return_tree_view">
+          <field name="name">return.tree</field>
+          <field name="model">comservice.com_return</field>
+          <field name="arch" type="xml">
+              <tree string="Returned Computer Tree">
+                  <field name="name"/>
+              </tree>
+          </field>
+      </record>
+
+      <record model="ir.ui.view" id="equipment_tree">
+          <field name="name">return.tree</field>
+          <field name="model">comservice.com_equipment</field>
+          <field name="arch" type="xml">
+              <tree string="Equipments">
+                  <field name="name" />
+                  <field name="brand" />
+                  <field name="modelName" />
+                  <field name="type_id" string="Equipment Type"/>
+              </tree>
+          </field>
+      </record>
+
+      <record model="ir.ui.view" id="program_tree">
+          <field name="name">return.tree</field>
+          <field name="model">comservice.com_program</field>
+          <field name="arch" type="xml">
+              <tree string="Programs">
+                  <field name="name" string="Program Name"/>
+                  <field name="version" string="Version"/>
+                  <field name="program_type" string="Program Type"/>
+              </tree>
+          </field>
+      </record>
+
+      <record model="ir.ui.view" id="requester_tree">
+          <field name="name">return.tree</field>
+          <field name="model">comservice.requester</field>
+          <field name="arch" type="xml">
+              <tree string="Requester">
+                  <field name="name"/>
+                  <field name="user_code"/>
+                  <field name="user_tel"/>
+                  <field name="user_company"/>
+                  <field name="user_division"/>
+                  <field name="user_section"/>
+              </tree>
+          </field>
+      </record>
+    </data>
+</openerp>

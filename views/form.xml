@@ -1,0 +1,100 @@
+<openerp>
+    <data>
+      <record model="ir.ui.view" id="com_receive_form_view">
+          <field name="name">com_receive.form</field>
+          <field name="model">comservice.com_receive</field>
+          <field name="arch" type="xml">
+              <form string="Receive Form">
+                  <header>
+                    <button string="Revise Form" type="object" name="revise_form"/>
+                    <!-- <button string="Add Requester" type="action" name="%(requester_list_action)d"/> -->
+                    <!-- <button string="Add Requester" type="object" name="add_requester"/> -->
+                  </header>
+                  <sheet>
+                    <group col="2" string="Returned Computer Form">
+                        <field name="returned_id" />
+                    </group>
+                      <group col="2" string="User Request">
+                        <field name="user_request_id"/>
+                        <field name="user_company"/>
+                      </group>
+                      <notebook >
+                          <page string="Equipments">
+                           <!-- <field name="equipment_ids" /> -->
+                              <field name="equipment_ids"  widget="one2many">
+                                  <tree string="Equipment List" editable="bottom">
+                                      <field name="equipment_id"/>
+                                      <field name="serial"/>
+                                      <field name="quantity"/>
+                                      <field name="cpu"/>
+                                      <field name="ram"/>
+                                      <field name="hdd"/>
+                                      <field name="isBroken"/>
+                                  </tree>
+                              </field >
+                          </page>
+                          <page string="Programs">
+                              <field name="program_ids"/>
+                          </page>
+                      </notebook>
+                  </sheet>
+              </form>
+          </field>
+      </record>
+
+      <record model="ir.ui.view" id="com_return_form_view">
+          <field name="name">com_return.form</field>
+          <field name="model">comservice.com_return</field>
+          <field name="arch" type="xml">
+              <form string="Return Form">
+                  <sheet>
+                    <group col="2" string="Receive Computer Form">
+                        <field name="received_ids" />
+                    </group>
+                      <group col="2">
+                          <group string="User Request" >
+                              <field name="user_request_id"/>
+                              <field name="user_company"/>
+                          </group>
+                      </group>
+                      <notebook >
+                          <page string="Equipments">
+                           <!-- <field name="equipment_ids" /> -->
+                              <field name="equipment_ids"  widget="one2many">
+                                  <tree string="Equipment List" editable="bottom">
+                                      <field name="equipment_id"/>
+                                      <field name="serial"/>
+                                      <field name="quantity"/>
+                                      <field name="cpu"/>
+                                      <field name="ram"/>
+                                      <field name="hdd"/>
+                                      <field name="isBroken"/>
+                                  </tree>
+                              </field >
+                          </page>
+                          <page string="Programs">
+                              <field name="program_ids"/>
+                          </page>
+                      </notebook>
+                  </sheet>
+              </form>
+          </field>
+      </record>
+      <record model="ir.ui.view" id="com_equipment_form">
+          <field name="name">com_equipment.form</field>
+          <field name="model">comservice.com_equipment</field>
+          <field name="arch" type="xml">
+              <form string="Equipment Form">
+                  <sheet>
+                    <group col="2" string="Equipment Detail">
+                        <field name="name" />
+                        <field name="brand" />
+                        <field name="modelName" />
+                        <field name="type_id" />
+                    </group>
+                  </sheet>
+              </form>
+          </field>
+      </record>
+    </data>
+</openerp>

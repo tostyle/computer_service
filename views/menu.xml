@@ -1,0 +1,119 @@
+<openerp>
+    <data>
+      <!-- computer form action -->
+      <record model="ir.actions.act_window" id="received_com_list_action">
+          <field name="name">Received Computer</field>
+          <field name="res_model">comservice.com_receive</field>
+          <field name="view_type">form</field>
+          <field name="view_mode">tree,form</field>
+      </record>
+
+     <record model="ir.actions.act_window" id="returned_com_list_action">
+          <field name="name">Returned Computer</field>
+          <field name="res_model">comservice.com_return</field>
+          <field name="view_type">form</field>
+          <field name="view_mode">tree,form</field>
+      </record>
+      <!--- equipment action -->
+      <record model="ir.actions.act_window" id="equipment_list_action">
+          <field name="name">Equipments</field>
+          <field name="res_model">comservice.com_equipment</field>
+          <field name="view_type">form</field>
+          <field name="view_mode">tree,form</field>
+      </record>
+
+      <record model="ir.actions.act_window" id="equipment_type_list_action">
+          <field name="name">Equipment Type</field>
+          <field name="res_model">comservice.com_equipment_type</field>
+          <field name="view_type">form</field>
+          <field name="view_mode">tree,form</field>
+      </record>
+      <!-- program action -->
+      <record model="ir.actions.act_window" id="program_list_action">
+          <field name="name">Programs</field>
+          <field name="res_model">comservice.com_program</field>
+          <field name="view_type">form</field>
+          <field name="view_mode">tree,form</field>
+      </record>
+      <!-- requester action -->
+      <record model="ir.actions.act_window" id="requester_list_action">
+          <field name="name">Requesters</field>
+          <field name="res_model">comservice.requester</field>
+          <field name="view_type">form</field>
+          <field name="view_mode">tree,form</field>
+      </record>
+      <!-- repair action -->
+      <record model="ir.actions.act_window" id="repair_list_action">
+          <field name="name">Repairs</field>
+          <field name="res_model">comservice.com_repair</field>
+          <field name="view_type">form</field>
+          <field name="view_mode">tree,form</field>
+      </record>
+      <!-- report action -->
+      <record model="ir.actions.act_window" id="report_list_action">
+          <field name="name">Summary Computer</field>
+          <field name="res_model">comservice.com_summary</field>
+          <field name="view_type">form</field>
+          <field name="view_mode">form</field>
+          <field name="target">new</field>
+      </record>
+      <record model="ir.actions.act_window" id="serial_report_list_action">
+          <field name="name">Search By Serial</field>
+          <field name="res_model">comservice.com_serial_search</field>
+          <field name="view_type">form</field>
+          <field name="view_mode">form</field>
+          <field name="target">new</field>
+      </record>
+        <!-- Level 0 Menu -->
+        <menuitem id="main_comservice_menu" name="Computer Service"/>
+        <!-- Level 1 Menu -->
+        <menuitem id="comservice_menu" name="Computer Service"
+                  parent="main_comservice_menu"/>
+        <menuitem id="equipments_menu" name="Equipments"
+                  parent="main_comservice_menu"/>
+        <menuitem id="programs_menu" name="Programs"
+                  parent="main_comservice_menu"/>
+        <menuitem id="repairs_menu" name="Repairs"
+                  parent="main_comservice_menu"/>
+        <menuitem id="requesters_menu" name="Requester"
+                  parent="main_comservice_menu"/>
+        <menuitem id="reports_menu" name="Reports"
+                  parent="main_comservice_menu"/>
+
+        <!-- Lv 2 Menu -->
+        <!-- computer service menu -->
+        <menuitem id="receive_menu" name="Received Computer"
+                  parent="comservice_menu"
+                  action="received_com_list_action"/>
+        <menuitem id="return_menu" name="Retured Computer"
+                  parent="comservice_menu"
+                  action="returned_com_list_action"/>
+        <!-- Equipment menu -->
+        <menuitem id="equipment_menu" name="Equipments"
+                  parent="equipments_menu"
+                  action="equipment_list_action"/>
+        <menuitem id="equipment_type_menu" name="Equipment Types"
+                  parent="equipments_menu"
+                  action="equipment_type_list_action"/>
+        <!-- Program Menu-->
+        <menuitem id="program_menu" name="Programs"
+                  parent="programs_menu"
+                  action="program_list_action"/>
+        <!-- Repart Menu-->
+        <menuitem id="repair_menu" name="Repairs"
+                  parent="repairs_menu"
+                  action="repair_list_action"/>
+        <!-- Requester Menu-->
+        <menuitem id="requester_menu" name="Requesters"
+                  parent="requesters_menu"
+                  action="requester_list_action"/>
+        <!-- Repor Menu-->
+        <menuitem id="summary_report_menu" name="Search By Users"
+                  parent="reports_menu"
+                  action="report_list_action"/>
+        <menuitem id="serial_report_menu" name="Search By Serial"
+                  parent="reports_menu"
+                  action="serial_report_list_action"/>
+
+    </data>
+</openerp>

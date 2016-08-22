@@ -1,0 +1,44 @@
+<openerp>
+    <data>
+      <record model="ir.ui.view" id="summary_serial_report_filter">
+          <field name="name">comsummarybyserial.filter</field>
+          <field name="model">comservice.com_serial_search</field>
+          <field name="arch" type="xml">
+              <form string="Search By Serial">
+                  <group>
+                      <field name="serial_search"/>
+                  </group>
+                  <footer>
+                    <button name="show_report" type="object"
+                               string="Show" class="oe_highlight"/>
+                  </footer>
+              </form>
+          </field>
+      </record>
+      <act_window id="launch_serial_search_report_wizard"
+                  name="Summary By Serial"
+                  res_model="comservice.com_serial_search"
+                  view_mode="form"
+                  target="new"
+                  key2="client_action_multi"/>
+      <report
+          id="summary_serial"
+          model="comservice.com_serial_search"
+          string="Print Report"
+          name="computer_service.report_summary_serial"
+          file="comservice.report_summary_serial"
+          report_type="qweb-html" />
+      <template id="report_summary_serial">
+          <t t-call="report.html_container">
+              <t t-call="report.internal_layout">
+                  <div class="page">
+                      <h2>Details of Sales xxxxxxxxxxxxx</h2>
+                      <span t-esc="res_company.name"/>
+                      <span t-esc="data['form']" />
+                      <span t-esc="getComRequestBySerial(data['form']['serial_search'])" />
+                  </div>
+              </t>
+          </t>
+      </template>
+    </data>
+</openerp>

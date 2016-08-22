@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+      <template id="report.style" name="style">
+          <style type="text/css">
+            .text-green
+            {
+              color:green;
+            }
+            
+
+          </style>
+      </template>
+        <template id="assets_backend" name="computer_service assets" inherit_id="web.assets_backend">
+            <xpath expr="." position="inside">
+                <link rel="stylesheet" href="/computer_service/static/src/js/custom.css"/>
+            </xpath>
+        </template>
+    </data>
+</openerp>

@@ -1,0 +1,129 @@
+<openerp>
+<data>
+    <report
+        id="report_return"
+        model="comservice.com_return"
+        string="Print Return Report"
+        name="computer_service.report_return_view"
+        file="comservice.report_return"
+        report_type="qweb-html" />
+
+    <template id="report_return_view">
+        <t t-call="report.html_container">
+          <t t-foreach="docs" t-as="doc">
+              <!-- <link rel="stylesheet" href="/computer_service/static/src/js/custom.css"/> -->
+
+              <div class="page">
+                  <h4 class="text-right" >เลขที่ <u><span t-field="doc.name"/></u></h4>
+                  <h1 class="text-center">แบบฟอร์มการส่งคืนคอมพิวเตอร์พร้อมอุปกรณ์</h1>
+
+                  <div class="row">
+                    <div class="col-xs-4">ชื่อ-นามสกุล <span t-field="doc.user_request_id.name"/></div>
+                    <div class="col-xs-4">รหัสพนักงาน <span t-field="doc.user_request_id.user_code"/></div>
+                    <div class="col-xs-4">บริษัท <span t-field="doc.user_company"/></div>
+                  </div>
+                  <div class="row">
+                    <div class="col-xs-4">แผนก <span t-field="doc.user_request_id.user_division"/></div>
+                    <div class="col-xs-4"> ฝ่าย <span t-field="doc.user_request_id.user_section"/></div>
+                    <div class="col-xs-4">เบอร์ต่อ <span t-field="doc.user_request_id.user_tel"/></div>
+                  </div>
+                  <div class="row" style="margin-top:20px;">
+
+                    <div class="col-xs-12">
+                      ได้ส่งคืนคอมพิวเตอร์ พร้อมทั้ง อุปกรณ์ ที่ใชในการปฏิบัติงาน ทั้งนี้เพื่อเป็นประโยชน์ในการบนทึกรายการทรัพย์สินของทางบริษัท  ฯ จึงขอ
+สรุปรายการคอมพิวเตอร์พร้อมอุปกรณ์ ที่ส่งคืนใหแก่ IT ดังนี้
+                    </div>
+                  </div>
+                  <table class="line-space table table-striped">
+                    <tr>
+                      <th>ที่</th>
+                      <th>รายการ</th>
+                      <th>S/N</th>
+                      <th>จำนวน</th>
+                      <th>เลขที่รับมอบก่อนส่งคืน</th>
+                    </tr>
+                    <t t-set="remain_length" t-value="range(6 - len(doc.equipment_ids))"/>
+                    <t t-foreach="doc.equipment_ids" t-as="equipment">
+                      <t t-set="equipment_index" t-value="equipment_index + 1"/>
+                      <tr>
+                        <td><t t-esc="equipment_index"/></td>
+                        <td><t t-esc="equipment.equipment_id.name"/></td>
+                        <td><t t-esc="equipment.serial"/></td>
+                        <td><t t-esc="equipment.quantity"/></td>
+                        <td><t t-esc="doc.received_id.name"/></td>
+                        <!-- <td><t t-esc="equipment.serial"/></td>
+                        <td><t t-esc="equipment.quantity"/></td> -->
+                      </tr>
+                    </t>
+                    <t t-foreach="remain_length" t-as="remain">
+                      <tr>
+                        <td><![CDATA[&nbsp;]]></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    </t>
+                    <tr>
+                      <td colspan="5">หมายเหตุ</td>
+                    </tr>
+                  </table>
+              </div>
+              <div class="row line-space">
+                <div class="col-xs-6">
+                  ลงชื่อ...................................................
+                  พนักงานผู้ส่งคืนทรัพย์สิน
+                </div>
+                <div class="col-xs-6">
+                  ลงชื่อ...................................................
+                  ผู้อนุมัติ DM/SM
+                </div>
+              </div>
+              <div class="row line-space">
+                <div class="col-xs-6">
+                  ( ................................................... )
+                </div>
+                <div class="col-xs-6">
+                  ( ................................................... )
+                </div>
+              </div>
+              <div class="row line-space">
+                <div class="col-xs-6">
+                  วันที่....................................................
+                </div>
+                <div class="col-xs-6">
+                  วันที่....................................................
+                </div>
+              </div>
+
+              <div class="row line-space">
+                <div class="col-xs-6">
+                  ลงชื่อ...................................................
+                  พนักงานผู้ส่งคืนทรัพย์สิน
+                </div>
+                <div class="col-xs-6">
+                  ลงชื่อ...................................................
+                  ผู้จัดการฝ่ าย IS
+                </div>
+              </div>
+              <div class="row line-space">
+                <div class="col-xs-6">
+                  ( ................................................... )
+                </div>
+                <div class="col-xs-6">
+                  ( ................................................... )
+                </div>
+              </div>
+              <div class="row line-space">
+                <div class="col-xs-6">
+                  วันที่....................................................
+                </div>
+                <div class="col-xs-6">
+                  วันที่....................................................
+                </div>
+              </div>
+          </t>
+        </t>
+    </template>
+</data>
+</openerp>

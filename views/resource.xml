@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+      <template id="report.style" name="style">
+
+      </template>
+        <template id="form_asset" name="computer_service assets" inherit_id="report.assets_common">
+            <xpath expr="." position="inside">
+                <link rel="stylesheet" href="/computer_service/static/src/js/custom.css"/>
+            </xpath>
+        </template>
+    </data>
+</openerp>

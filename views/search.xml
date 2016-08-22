@@ -1,0 +1,20 @@
+<openerp>
+    <data>
+      <record model="ir.ui.view" id="comreceive_search_view">
+          <field name="name">comreceive.search</field>
+          <field name="model">comservice.com_receive</field>
+          <field name="arch" type="xml">
+              <search>
+                <filter string="PGP Company" domain="[('user_company','=','PGP')]" />
+                  <field name="name"/>
+                  <field name="user_company"/>
+                   <field name="requested_company"/>
+                  <field name="user_request_id">
+                    <field name="user_division" />
+                  </field>
+
+              </search>
+          </field>
+      </record>
+    </data>
+</openerp>
