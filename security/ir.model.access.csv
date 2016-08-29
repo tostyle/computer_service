@@ -1,2 +1,10 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_computer_service_computer_service,computer_service.computer_service,model_computer_service_computer_service,,1,0,0,0
+computer_service_receive_form,computer_service.com_receive,model_comservice_com_receive,,1,1,1,1
+computer_service_return_form,computer_service.com_return,model_comservice_com_return,,1,1,1,1
+computer_service_equipment,computer_service.com_equipment,model_comservice_com_equipment,,1,1,1,1
+computer_service_equipment_type,computer_service.com_equipment_type,model_comservice_com_equipment_type,,1,1,1,1
+computer_service_program,computer_service.com_program,model_comservice_com_program,,1,1,1,1
+computer_service_requester,computer_service.requester,model_comservice_requester,,1,1,1,1
+computer_service_com_request,computer_service.com_request,model_comservice_com_request,,1,1,1,1
+computer_service_com_request_equipment,computer_service.com_request_equipment,model_comservice_com_request_equipment,,1,1,1,1
+computer_service_com_request,computer_service.com_request,model_comservice_com_request,,1,1,1,1
