@@ -6,6 +6,7 @@
           <field name="arch" type="xml">
               <form string="Receive Form">
                   <header>
+    
                     <button string="Revise Form" type="object" name="revise_form"/>
                     <!-- <button string="Add Requester" type="action" name="%(requester_list_action)d"/> -->
                     <!-- <button string="Add Requester" type="object" name="add_requester"/> -->
@@ -41,7 +42,7 @@
               </form>
           </field>
       </record>
-
+    
       <record model="ir.ui.view" id="com_return_form_view">
           <field name="name">com_return.form</field>
           <field name="model">comservice.com_return</field>

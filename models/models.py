@@ -34,6 +34,13 @@ class ComputerReceive(models.Model):
          ondelete='set null', string="Returned Computer", index=True)
     returned_ids = fields.Many2many('comservice.com_return', string="Return Forms")
     requested_company = fields.Char(string="Requested Company" ,related="user_request_id.user_company")
+    def get_remain_index(self,indexs,programType):
+        indexs[programType] = indexs[programType] + 1
+        return indexs
+    def get_remain_type_index(self,indexs,programType):
+        print indexs
+        print programType
+        return range(7 - indexs[programType])
     # @api.one
     # def revise_form(self):
     @api.model

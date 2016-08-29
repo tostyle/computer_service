@@ -6,11 +6,30 @@ body
 {
    font-size:12px;
 }
+.equipment-table
+{
+	font-size: 10px;
+}
 .program-table
 {
-	font-size: 6px;
+	font-size: 10px;
 }
 .program-table.table-striped > tbody > tr > td
 {
    padding: 3px;
+}
+.text-indent-normal{
+   text-indent: 1.5em;
+}
+.footer {
+ /* position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;*/
+  max-height: 30%;
+}
+.wrapper-content
+{
+	min-height: 70%;
+	max-height: 70%;
 }

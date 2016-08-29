@@ -12,10 +12,10 @@
         <t t-call="report.html_container">
           <t t-foreach="docs" t-as="doc">
               <!-- <link rel="stylesheet" href="/computer_service/static/src/js/custom.css"/> -->
-
+              <div class="wrapper-content">
               <div class="page">
-                  <h4 class="text-right" >เลขที่ <u><span t-field="doc.name"/></u></h4>
-                  <h3 class="text-center">แบบฟอร์มการรับคอมพิวเตอร์พร้อมอุปกรณ์ และโปรแกรมที่ติดตั้ง</h3>
+                  <p class="text-right" >เลขที่ <u><span t-field="doc.name"/></u></p>
+                  <h4 class="text-center"><strong>แบบฟอร์มการรับคอมพิวเตอร์พร้อมอุปกรณ์ และโปรแกรมที่ติดตั้ง</strong></h4>
 
                   <div class="row">
                     <div class="col-xs-4">ชื่อ-นามสกุล <span t-field="doc.user_request_id.name"/></div>
@@ -30,35 +30,38 @@
                   <div class="row" style="margin-top:20px;">
 
                     <div class="col-xs-12">
-                      ได้รับคอมพิวเตอร์ที่ได้ทำการติดตั้งโปรแกรม พร้อมทั้งอุปกรณ์เพื่อใช้ในการปฏิบัติงาน ทั้งนี้เพื่อเป็นประโยชน์ในการบันทึกรายการทรัพย์สินของทางบริษัทฯ จึงขอสรุปรายการคอมพิวเตอร์พร้อมอุปกรณ์ และโปรแกรมที่ทำการติดตั้ง ดังนี้
+                      <p class="text-indent-normal">ได้รับคอมพิวเตอร์ที่ได้ทำการติดตั้งโปรแกรม พร้อมทั้งอุปกรณ์เพื่อใช้ในการปฏิบัติงาน ทั้งนี้เพื่อเป็นประโยชน์ในการบันทึกรายการทรัพย์สินของทางบริษัทฯ จึงขอสรุปรายการคอมพิวเตอร์พร้อมอุปกรณ์ และโปรแกรมที่ทำการติดตั้ง ดังนี้
+                      </p>
                     </div>
                   </div>
                   <div class="row">
                     <div class="col-xs-9">
-                      <table class="line-space table table-striped table-bordered">
+                      <table class="equipment-table line-space table table-striped table-bordered">
                         <tr>
-                          <th class="col-xs-1">ที่</th>
-                          <th class="col-xs-6">รายการ </th>
+                          <th class="col-xs-1 text-center">ที่</th>
+                          <th class="col-xs-5 text-center">รายการ </th>
                           <th class="col-xs-2 text-center">S/N</th>
-                          <th class="col-xs-1 text-center">จำนวน</th>
-                          <th class="col-xs-2">เลขที่รับคืน</th>
+                          <th class="col-xs-2 text-center">จำนวน</th>
+                          <th class="col-xs-2 text-center">เลขที่รับคืน</th>
                         </tr>
-                        <t t-set="remain_length" t-value="range(6 - len(doc.equipment_ids))"/>
+                        <t t-set="remain_length" t-value="range(8 - len(doc.equipment_ids))"/>
                         <t t-foreach="doc.equipment_ids" t-as="equipment">
                           <t t-set="equipment_index" t-value="equipment_index + 1"/>
                           <tr>
-                            <td class="col-xs-1"><t t-esc="equipment_index"/></td>
-                            <td class="col-xs-6"><t t-esc="equipment.equipment_id.name"/></td>
+                            <td class="col-xs-1">
+                              <div class="text-center" style="height:30px;"><t t-esc="equipment_index"/></div>
+                            </td>
+                            <td class="col-xs-6 text-left"><t t-esc="equipment.equipment_id.name"/></td>
                             <td class="col-xs-2 text-center"><t t-esc="equipment.serial"/></td>
                             <td class="col-xs-1 text-center"><t t-esc="equipment.quantity"/></td>
-                            <td class="col-xs-2"><t t-esc="doc.returned_id.name"/></td>
+                            <td class="col-xs-2 text-left"><t t-esc="doc.returned_id.name"/></td>
                             <!-- <td><t t-esc="equipment.serial"/></td>
                             <td><t t-esc="equipment.quantity"/></td> -->
                           </tr>
                         </t>
                         <t t-foreach="remain_length" t-as="remain">
                           <tr>
-                            <td><![CDATA[&nbsp;]]></td>
+                            <td><div style="height:30px;"><![CDATA[&nbsp;]]></div></td>
                             <td></td>
                             <td></td>
                             <td></td>
@@ -73,22 +76,38 @@
                     <div class="col-xs-3">
                       <table class="program-table line-space table table-striped table-condensed">
                         <tr>
-                          <th>โปรแกรมที่ติดตั้ง</th>
+                          <th>โปรแกรมที่ติดตั้ง
+                              <t t-esc="program_type" />
+                          </th>
                         </tr>
+                        <t t-set="program_indexs" t-value="{'freeware' : 0 ,'license': 0 }"/>
+                        <t t-set="pgtype" t-value="0" />
                         <t t-foreach="[{'value':'freeware','name':'Freeware'},
                                        {'value':'license','name':'License'}]" t-as="program_type">
                           <tr>
-                            <td><strong><t t-esc="program_type['name']"/></strong></td>
+                            <td><strong><u><t t-esc="program_type['name']"/></u></strong></td>
                           </tr>
 
                           <t t-foreach="doc.program_ids" t-as="program">
+                            
                             <t t-if="program.program_type==program_type['value']" >
+                              <t t-set="program_indexs" t-value="doc.get_remain_index(program_indexs,program.program_type)"/>
                               <tr>
-                                  <td><t t-esc="program.name"/>
-                                      <t t-esc="program.version"/>
+                                  <td><div style="height:20px">
+                                        <t t-esc="program.name"/>
+                                        <t t-esc="program.version"/>
+                                       
+                                      </div >
                                   </td>
                               </tr>
                             </t>
+                          </t>
+                          
+                          <t t-set="program_remain_length" t-value="doc.get_remain_type_index(program_indexs,program_type['value'])" />
+                          <t t-foreach="program_remain_length" t-as="pg-remain">
+                            <tr>
+                              <td><div style="height:20px;"><![CDATA[&nbsp;]]></div></td>
+                            </tr>
                           </t>
                         </t>
                       </table>
@@ -98,61 +117,67 @@
 
               <div class="row">
               <div class="col-xs-12">
-                      โดยที่ข้าพเจ้า.............................................................................. รับทราบถึงความรับผิดชอบในการจัดเก็บทรัพย์สินของบริษัทฯ ในกรณีที่ทรัพย์สินของบริษัทฯ เกิดการชำรุด หรือสูญหายอันเนื่องมาจากความประมาทของพนักงาน หรือมีการติดตั้งโปรแกรมที่ละเมิดลิขสิทธิ์ โดยไม่ได้รับอนุญาต พนักงานผู้รับทรัพย์สินยินดีที่จะรับผิดชอบค่าใช้จ่าย หรือค่าเสียหายที่เกิดขึ้น
-                    </div>
-                    </div>
+                <p class="text-indent-normal">       โดยที่ข้าพเจ้า.............................................................................. รับทราบถึงความรับผิดชอบในการจัดเก็บทรัพย์สินของบริษัทฯ ในกรณีที่ทรัพย์สินของบริษัทฯ เกิดการชำรุด หรือสูญหายอันเนื่องมาจากความประมาทของพนักงาน หรือมีการติดตั้งโปรแกรมที่ละเมิดลิขสิทธิ์ โดยไม่ได้รับอนุญาต พนักงานผู้รับทรัพย์สินยินดีที่จะรับผิดชอบค่าใช้จ่าย หรือค่าเสียหายที่เกิดขึ้น
+                </p>
+                       <br />
+                        <br />
+              </div>
+              </div>
+               </div>
+              <div class="footer">
               <div class="row line-space">
-                <div class="col-xs-6 text-center">
+                <div class="col-xs-6 text-left">
                   ลงชื่อ...................................................
                   พนักงานผู้ส่งคืนทรัพย์สิน
                 </div>
-                <div class="col-xs-6 text-center">
+                <div class="col-xs-6 text-left">
                   ลงชื่อ...................................................
                   ผู้อนุมัติ DM/SM
                 </div>
               </div>
               <div class="row line-space">
-                <div class="col-xs-6 text-center">
+                <div class="col-xs-6 text-left text-indent-normal">
                   ( ................................................... )
                 </div>
-                <div class="col-xs-6 text-center">
+                <div class="col-xs-6 text-left text-indent-normal">
                   ( ................................................... )
                 </div>
               </div>
               <div class="row line-space">
-                <div class="col-xs-6 text-center">
+                <div class="col-xs-6 text-left">
                   วันที่....................................................
                 </div>
-                <div class="col-xs-6 text-center">
+                <div class="col-xs-6 text-left">
                   วันที่....................................................
                 </div>
               </div>
 
               <div class="row line-space">
-                <div class="col-xs-6 text-center">
+                <div class="col-xs-6 text-left">
                   ลงชื่อ...................................................
                   พนักงานผู้ส่งคืนทรัพย์สิน
                 </div>
-                <div class="col-xs-6 text-center">
+                <div class="col-xs-6 text-left">
                   ลงชื่อ...................................................
                   ผู้จัดการฝ่ าย IS
                 </div>
               </div>
               <div class="row line-space">
-                <div class="col-xs-6 text-center">
+                <div class="col-xs-6 text-left text-indent-normal">
                   ( ................................................... )
                 </div>
-                <div class="col-xs-6 text-center">
+                <div class="col-xs-6 text-left text-indent-normal">
                   ( ................................................... )
                 </div>
               </div>
               <div class="row line-space">
-                <div class="col-xs-6 text-center">
+                <div class="col-xs-6 text-left">
                   วันที่....................................................
                 </div>
-                <div class="col-xs-6 text-center">
+                <div class="col-xs-6 text-left">
                   วันที่....................................................
                 </div>
+              </div>
               </div>
           </t>
         </t>
