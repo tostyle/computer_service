@@ -12,10 +12,10 @@
         <t t-call="report.html_container">
           <t t-foreach="docs" t-as="doc">
               <!-- <link rel="stylesheet" href="/computer_service/static/src/js/custom.css"/> -->
-
+              <div class="wrapper-content">
               <div class="page">
-                  <h4 class="text-right" >เลขที่ <u><span t-field="doc.name"/></u></h4>
-                  <h1 class="text-center">แบบฟอร์มการส่งคืนคอมพิวเตอร์พร้อมอุปกรณ์</h1>
+                  <p class="text-right" >เลขที่ <u><span t-field="doc.name"/></u></p>
+                  <h4 class="text-center">แบบฟอร์มการส่งคืนคอมพิวเตอร์พร้อมอุปกรณ์</h4>
 
                   <div class="row">
                     <div class="col-xs-4">ชื่อ-นามสกุล <span t-field="doc.user_request_id.name"/></div>
@@ -68,6 +68,7 @@
                       <td colspan="5">หมายเหตุ</td>
                     </tr>
                   </table>
+              </div>
               </div>
               <div class="row line-space">
                 <div class="col-xs-6">
