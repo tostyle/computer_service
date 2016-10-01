@@ -18,12 +18,11 @@ class ComputerSerialSearch(models.TransientModel):
 
 class summary_serial(report_sxw.rml_parse):
     def _get_com_request_by_serial(self,search_serialNo):
-        print 'startttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt'
         request_equipment = self.pool.get('comservice.com_request_equipment')
         equipments = request_equipment.search(self.cr, self.uid, [ ('serial','=',search_serialNo) ] )
         equipment_list = request_equipment.browse(self.cr, self.uid, equipments)
         return equipment_list
-
+    # def _get_com_receive_by_serial(self,search_serialNo):
     def __init__(self, cr, uid, name, context):
         super(summary_serial, self).__init__(cr, uid, name, context=context)
         self.localcontext.update({

@@ -30,26 +30,26 @@
                   <div class="row" style="margin-top:20px;">
 
                     <div class="col-xs-12">
-                      ได้ส่งคืนคอมพิวเตอร์ พร้อมทั้ง อุปกรณ์ ที่ใชในการปฏิบัติงาน ทั้งนี้เพื่อเป็นประโยชน์ในการบนทึกรายการทรัพย์สินของทางบริษัท  ฯ จึงขอ
-สรุปรายการคอมพิวเตอร์พร้อมอุปกรณ์ ที่ส่งคืนใหแก่ IT ดังนี้
+                      ได้ส่งคืนคอมพิวเตอร์พร้อมทั้งอุปกรณ์ที่ใช้ในการปฏิบัติงาน ทั้งนี้เพื่อเป็นประโยชน์ในการบันทึกรายการทรัพย์สินของทางบริษัท จึงขอ
+สรุปรายการคอมพิวเตอร์พร้อมอุปกรณ์ที่ส่งคืนใหแก่ฝ่าย IT Support ดังนี้
                     </div>
                   </div>
-                  <table class="line-space table table-striped">
+                  <table class="line-space table table-striped table-bordered">
                     <tr>
-                      <th>ที่</th>
-                      <th>รายการ</th>
-                      <th>S/N</th>
-                      <th>จำนวน</th>
-                      <th>เลขที่รับมอบก่อนส่งคืน</th>
+                      <th class="col-xs-1 text-center">ที่</th>
+                      <th class="col-xs-5 text-center">รายการ</th>
+                      <th class="col-xs-2 text-center">S/N</th>
+                      <th class="col-xs-1 text-center">จำนวน</th>
+                      <th class="col-xs-3 text-center">เลขที่รับมอบก่อนส่งคืน</th>
                     </tr>
-                    <t t-set="remain_length" t-value="range(6 - len(doc.equipment_ids))"/>
+                    <t t-set="remain_length" t-value="range(13 - len(doc.equipment_ids))"/>
                     <t t-foreach="doc.equipment_ids" t-as="equipment">
                       <t t-set="equipment_index" t-value="equipment_index + 1"/>
                       <tr>
-                        <td><t t-esc="equipment_index"/></td>
+                        <td class="text-center"><t t-esc="equipment_index"/></td>
                         <td><t t-esc="equipment.equipment_id.name"/></td>
-                        <td><t t-esc="equipment.serial"/></td>
-                        <td><t t-esc="equipment.quantity"/></td>
+                        <td class="text-center"><t t-esc="equipment.serial"/></td>
+                        <td class="text-center"><t t-esc="equipment.quantity"/></td>
                         <td><t t-esc="doc.received_id.name"/></td>
                         <!-- <td><t t-esc="equipment.serial"/></td>
                         <td><t t-esc="equipment.quantity"/></td> -->
@@ -100,11 +100,11 @@
               <div class="row line-space">
                 <div class="col-xs-6">
                   ลงชื่อ...................................................
-                  พนักงานผู้ส่งคืนทรัพย์สิน
+                  พนักงานผู้รับทรัพย์สิน
                 </div>
                 <div class="col-xs-6">
                   ลงชื่อ...................................................
-                  ผู้จัดการฝ่ าย IS
+                  ผู้จัดการฝ่าย IS
                 </div>
               </div>
               <div class="row line-space">

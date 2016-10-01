@@ -32,10 +32,39 @@
           <t t-call="report.html_container">
               <t t-call="report.internal_layout">
                   <div class="page">
-                      <h2>Details of Sales xxxxxxxxxxxxx</h2>
-                      <span t-esc="res_company.name"/>
-                      <span t-esc="data['form']" />
-                      <span t-esc="getComRequestBySerial(data['form']['serial_search'])" />
+                      <h2 class="text-center">Search by Serial</h2>
+                      
+                      <table class="table">
+                        <tbody>
+                          <tr>
+                            <th>ID</th>
+                            <th>Request by</th> 
+                            <th>Serial</th> 
+                            <th>Brand</th> 
+                            <th>Equipment</th> 
+                          </tr>
+                        </tbody>
+                        <t t-foreach="getComRequestBySerial(data['form']['serial_search'])" t-as="form">
+                          <t t-if="form.return_id" >
+                            <tr>
+                              <td><span t-esc="form.return_id.name" /></td>
+                              <td><span t-esc="form.return_id.user_request_id.name" /></td>
+                              <td><span t-esc="form.serial" /></td>
+                              <td><span t-esc="form.equipment_id.brand" /></td>
+                              <td><span t-esc="form.equipment_id.name" /></td>
+                            </tr>
+                          </t>
+                          <t t-if="form.receive_id" >
+                            <tr>
+                              <td><span t-esc="form.receive_id.name" /></td>
+                              <td><span t-esc="form.receive_id.user_request_id.name" /></td>
+                              <td><span t-esc="form.serial" /></td>
+                              <td><span t-esc="form.equipment_id.brand" /></td>
+                              <td><span t-esc="form.equipment_id.name" /></td>
+                            </tr>
+                          </t>
+                        </t>
+                      </table>
                   </div>
               </t>
           </t>
